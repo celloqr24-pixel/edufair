@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Undangan Edu Fair 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap" style="max-width:1000px">
+    <h1 style="font-size:2rem">Kirim undangan Edu Fair &amp; Career Day 2026</h1>
+    <p class="to-label" style="margin-top:8px">Muat data tamu, lalu kirim undangan personal lewat WhatsApp.</p>
+  </div>
+</header>
+
+<main class="wrap" style="max-width:1000px">
+  <div class="tools">
+    <label>1. Pilih file data tamu (.csv)
+      <input type="file" id="fileCsv" accept=".csv">
+    </label>
+    <label>2. Alamat web undangan
+      <input id="baseUrl" placeholder="https://usernamekamu.github.io/namarepo/index.html">
+    </label>
+  </div>
+  <p class="hint" id="status">Belum ada data. Pilih file CSV dengan kolom id, nama_tamu, instansi, kategori, no_whatsapp.</p>
+
+  <div class="scroll" style="margin-top:16px">
+    <table>
+      <thead><tr><th>ID</th><th>Nama tamu</th><th>Instansi</th><th>Kategori</th><th>No. WhatsApp</th><th>Aksi</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</main>
+<footer>Halaman admin lokal · jangan dibagikan ke tamu</footer>
+
+<script>
+// Otomatis memakai alamat index.html di tempat admin.html ini di-host (GitHub Pages milikmu)
+if (location.protocol.startsWith("http")) {
+  document.getElementById("baseUrl").value = new URL("index.html", location.href).href;
+}
+const tbody = document.getElementById("tbody");
+const statusEl = document.getElementById("status");
+let tamu = [];
+
+function normalisasiNomor(n) {
+  let d = String(n || "").replace(/\D/g, "");
+  if (d.startsWith("0")) d = "62" + d.slice(1);
+  return d;
+}
+
+function linkUndangan(t) {
+  const base = document.getElementById("baseUrl").value.trim();
+  return base + "?to=" + encodeURIComponent(t.nama_tamu) + "&instansi=" + encodeURIComponent(t.instansi) + "&kategori=" + encodeURIComponent(t.kategori);
+}
+
+function pesanUndangan(t) {
+  return "Yth. " + t.nama_tamu + " (" + t.instansi + "),\n\n" +
+    "Kami mengundang Anda menghadiri *Edu Fair & Career Day 2026* di SMK Negeri 6 Kota Tangerang Selatan, " +
+    "25–26 November 2026, mulai pukul 08.00 WIB.\n\n" +
+    "Buka undangan Anda dan konfirmasi kehadiran di sini:\n" + linkUndangan(t) +
+    "\n\nTerima kasih. Salam hormat,\nPanitia Edu Fair & Career Day 2026";
+}
+
+function render() {
+  tbody.innerHTML = "";
+  tamu.forEach((t, i) => {
+    const tr = document.createElement("tr");
+    [t.id, t.nama_tamu, t.instansi, t.kategori, t.no_whatsapp].forEach(v => {
+      const td = document.createElement("td");
+      td.textContent = v;
+      tr.appendChild(td);
+    });
+    const aksi = document.createElement("td");
+
+    const kirim = document.createElement("a");
+    kirim.className = "btn wa";
+    kirim.textContent = "Kirim Undangan WhatsApp";
+    kirim.target = "_blank";
+    kirim.rel = "noopener";
+    // href dibuat saat diklik supaya selalu memakai alamat web terbaru
+    kirim.href = "#";
+    kirim.addEventListener("click", () => {
+      kirim.href = "https://wa.me/" + normalisasiNomor(t.no_whatsapp) + "?text=" + encodeURIComponent(pesanUndangan(t));
+    });
+
+    const salin = document.createElement("button");
+    salin.className = "alt";
+    salin.textContent = "Salin link";
+    salin.style.marginLeft = "8px";
+    salin.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(linkUndangan(t)); salin.textContent = "Tersalin"; }
+      catch { prompt("Salin link ini:", linkUndangan(t)); }
+      setTimeout(() => (salin.textContent = "Salin link"), 1500);
+    });
+
+    aksi.append(kirim, salin);
+    tr.appendChild(aksi);
+    tbody.appendChild(tr);
+  });
+  statusEl.textContent = tamu.length + " tamu dimuat.";
+}
+
+function muat(hasil) {
+  tamu = hasil.data.filter(r => r.nama_tamu);
+  tamu.length ? render() : (statusEl.textContent = "Tidak ada data tamu yang terbaca. Cek nama kolom pada CSV.");
+}
+
+document.getElementById("fileCsv").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (f) Papa.parse(f, { header: true, skipEmptyLines: true, complete: muat });
+});
+
+// Coba muat data-tamu.csv otomatis (berhasil di GitHub Pages / server lokal, bukan file://)
+Papa.parse("data-tamu.csv", { download: true, header: true, skipEmptyLines: true, complete: r => r.data.length && muat(r), error: () => {} });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+:root{--ink:#10233f;--paper:#f6f8fb;--card:#fff;--amber:#f0a81e;--sky:#2f7bd9;--mute:#5b6b82;--line:#dbe3ee}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+.hero{background:var(--ink);color:#fff;padding:56px 0 48px;border-bottom:6px solid var(--amber)}
+.to-label{margin:0 0 6px;color:#aebfd8}
+#namaTamu{font-size:clamp(2rem,7vw,3.4rem);overflow-wrap:anywhere}
+.chip{display:inline-block;margin:12px 0 0;padding:4px 14px;border-radius:99px;background:var(--amber);color:var(--ink);font-weight:600}
+.lead{margin:36px 0 4px;color:#aebfd8}
+.event{font-size:clamp(1.6rem,5vw,2.4rem)}
+.tema{margin:10px 0 0;font-style:italic;color:#dbe6f6}
+
+section{padding:36px 0 0}
+section h3{font-size:1.5rem;margin-bottom:14px}
+.info{display:grid;gap:10px;margin:0}
+.info div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.info dt{font-size:.85rem;color:var(--mute)}
+.info dd{margin:0;font-weight:600}
+iframe{width:100%;height:320px;border:0;border-radius:10px}
+
+.rundown{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--sky)}
+.rundown li{padding:8px 0}
+.rundown b{display:block;color:var(--sky)}
+.benefit{margin:0;padding-left:20px}
+.benefit li{padding:3px 0}
+
+form,.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
+label{display:block;margin:0 0 14px;font-weight:600}
+input,select,textarea{display:block;width:100%;margin-top:6px;padding:10px 12px;font:inherit;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:80px}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:11px 18px;background:var(--amber);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-block}
+button.alt{background:var(--paper);border:1px solid var(--line)}
+button:hover,.btn:hover{filter:brightness(.95)}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.hint{color:var(--mute);font-size:.9rem;margin:12px 0 0}
+footer{padding:40px 0;text-align:center;color:var(--mute);font-size:.9rem}
+
+/* admin */
+.tools{display:grid;gap:12px;margin:24px 0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--ink);color:#fff}
+td .btn,td button{padding:7px 12px;font-size:.9rem}
+.wa{background:#25d366;color:#04361a}
+@media(min-width:640px){.info{grid-template-columns:repeat(3,1fr)}.tools{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:no-preference){.hero .wrap{animation:in .6s ease-out}@keyframes in{from{opacity:0;transform:translateY(10px)}}}
+
+/* cover (tampilan awal) */
+[hidden]{display:none!important}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px;color:#fff;background:radial-gradient(circle at 15% 10%,#1f4580 0,transparent 55%),linear-gradient(160deg,#0a1628,#10233f 60%,#16336a)}
+.badge{padding:6px 18px;border-radius:99px;background:rgba(255,255,255,.14);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.cover h1{font-size:clamp(2.2rem,8vw,3.6rem);margin:20px 0 10px}
+.cover .tema{margin:0;color:#7fb2ff;max-width:34ch}
+.tamu-card{margin:32px 0;padding:24px 28px;width:100%;max-width:480px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);border-radius:18px;backdrop-filter:blur(6px)}
+.tamu-card small{color:#c6d4ea}
+.tamu-card h2{font-size:1.6rem;margin:8px 0 4px;overflow-wrap:anywhere}
+.instansi{margin:0 0 8px;color:#dbe6f6}
+.btn-buka{background:#fff;color:#1b3a8a;border-radius:99px;padding:14px 32px;font-size:1.05rem;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.event-title{font-size:clamp(1.8rem,6vw,2.8rem)}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Edu Fair &amp; Career Day 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Tampilan awal (cover) -->
+<section class="cover" id="cover">
+  <span class="badge">Official Invitation</span>
+  <h1>Edu Fair &amp;<br>Career Day 2026</h1>
+  <p class="tema">“Membangun Masa Depan Gemilang Bersama Inovasi Teknologi”</p>
+
+  <div class="tamu-card">
+    <small>Kepada Yth. Bapak/Ibu/Saudara/i:</small>
+    <h2 id="coverNama">Tamu Undangan</h2>
+    <p id="coverInstansi" class="instansi" hidden></p>
+    <span id="coverKategori" class="chip" hidden></span>
+  </div>
+
+  <button type="button" class="btn-buka" id="btnBuka">Buka Undangan</button>
+</section>
+
+<!-- Isi undangan (muncul setelah tombol ditekan) -->
+<div id="isi" hidden>
+  <header class="hero">
+    <div class="wrap">
+      <p class="to-label">Anda diundang menghadiri</p>
+      <h1 class="event-title">Edu Fair &amp; Career Day 2026</h1>
+      <p class="tema">“Membangun Masa Depan Gemilang Bersama Inovasi Teknologi”</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <dl class="info">
+        <div><dt>Tanggal</dt><dd>25–26 November 2026</dd></div>
+        <div><dt>Waktu</dt><dd>08.00 WIB – selesai</dd></div>
+        <div><dt>Tempat</dt><dd>SMK Negeri 6 Kota Tangerang Selatan</dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h3>Lokasi acara</h3>
+      <iframe title="Peta SMKN 6 Tangerang Selatan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0030725082875!2d106.66607649999999!3d-6.263324099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fb06a47e36b7%3A0x93b22c3ee1f216b1!2sSMKN%206%20Tangerang%20Selatan!5e0!3m2!1sid!2sid!4v1794710064452!5m2!1sid!2sid"></iframe>
+    </section>
+
+    <section>
+      <h3>Rundown acara</h3>
+      <ul class="rundown">
+        <li><b>08.00 – 08.30</b>Registrasi tamu &amp; pembukaan</li>
+        <li><b>08.30 – 09.15</b>Sambutan Kepala Sekolah &amp; keynote speaker</li>
+        <li><b>09.15 – 12.00</b>Expo kampus &amp; career booth</li>
+        <li><b>13.00 – 15.00</b>Workshop &amp; sharing session</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Benefit booth untuk Anda</h3>
+      <ul class="benefit" id="benefit"></ul>
+    </section>
+
+    <section>
+      <h3>Konfirmasi kehadiran (RSVP)</h3>
+      <form id="rsvpForm">
+        <label>Nama
+          <input id="rsvpNama" required>
+        </label>
+        <label>Apakah Anda akan hadir?
+          <select id="rsvpStatus" required>
+            <option value="">Pilih konfirmasi</option>
+            <option value="hadir">Ya, saya hadir</option>
+            <option value="tidak">Mohon maaf, berhalangan hadir</option>
+          </select>
+        </label>
+        <label>Catatan untuk panitia (opsional)
+          <textarea id="rsvpCatatan"></textarea>
+        </label>
+        <button type="submit">Kirim konfirmasi via WhatsApp</button>
+        <p class="hint">WhatsApp akan terbuka dengan pesan siap kirim ke panitia. Tekan tombol kirim di WhatsApp untuk menyelesaikan konfirmasi.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>Panitia Edu Fair &amp; Career Day 2026 · SMK Negeri 6 Kota Tangerang Selatan</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
